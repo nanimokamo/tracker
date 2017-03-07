@@ -1,0 +1,27 @@
+.App {
+	width: 425px;
+	height: 600px;
+}
+
+.AppContent {
+	position: fixed;
+	top: $HEADER_HEIGHT;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: $GREY_1;
+
+	transform: none;
+	transition: transform 0.2s ease;
+
+	.App.sidenav-is-open & {
+		transform: translateX($WINDOWS_WIDTH);
+	}
+}
+
+.AppContent-inner {
+	height: 100%;
+	will-change: scroll-position;
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
+}

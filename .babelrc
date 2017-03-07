@@ -1,0 +1,13 @@
+{
+	plugins: [
+		'transform-async-to-generator',
+		'syntax-do-expressions',
+		'transform-function-bind',
+		'transform-flow-strip-types',
+	],
+	presets: [
+		'es2015',
+		'stage-0',
+		'react',
+	],
+}
