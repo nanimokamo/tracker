@@ -1,0 +1,40 @@
+.Tabs {
+  position: fixed;
+  top: $HEADER_HEIGHT;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+
+  background-color: blue;
+  color: white;
+  height: $TABS_HEIGHT;
+
+  opacity: 0.05;
+}
+
+.Tabs-item {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.is-active {
+    font-weight: bold;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 5px;
+      background-color: yellow;
+      z-index: 1;
+    }
+  }
+}

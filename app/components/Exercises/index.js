@@ -2,6 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import FloatingAction from 'components/shared/FloatingAction';
+import List from 'components/shared/List';
+import ListItem from 'components/shared/List/ListItem';
+
 import { getExercises } from './store/selectors.js';
 
 class Exercises extends React.Component {
@@ -11,6 +15,11 @@ class Exercises extends React.Component {
 
   constructor(props) {
     super(props);
+    this.showAddExerciseDialog = this.showAddExerciseDialog.bind(this);
+  }
+
+  showAddExerciseDialog() {
+    // this.props.showDialog('NEW_EXERCISE');
   }
 
   render() {
@@ -18,18 +27,22 @@ class Exercises extends React.Component {
 
     return (
       <div>
-        Exercises:
-        {exercises.map(e => {
-          return e.name;
-        })}
+        <List>
+          {exercises.map((e, i) => {
+            return <ListItem key={i} >{e.name} - {e.muscleGroup}</ListItem>;
+          })}
+        </List>
+
+        <FloatingAction
+          icon="add"
+          onClick={this.showAddExerciseDialog}
+        />
       </div>
     );
   }
 }
 
 const mapDispatchToProps = {
-  // moveSelectedTabsToWindow,
-  // hideWindows: toggleWindowsVisibility,
 };
 
 const mapStateToProps = createStructuredSelector({

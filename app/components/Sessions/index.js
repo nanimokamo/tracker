@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { withRouter } from 'react-router';
+
+import FloatingAction from 'components/shared/FloatingAction';
 
 import { getSessions } from './store/selectors.js';
 
@@ -11,6 +14,11 @@ class Sessions extends React.Component {
 
   constructor(props) {
     super(props);
+    this.navigateToNewSession = ::this.navigateToNewSession;
+  }
+
+  navigateToNewSession() {
+    this.props.history.push('/sessions/new');
   }
 
   render() {
@@ -22,18 +30,21 @@ class Sessions extends React.Component {
         {sessions.map(s => {
           return JSON.stringify(s);
         })}
+
+        <FloatingAction
+          icon="add"
+          onClick={this.navigateToNewSession}
+        />
       </div>
     );
   }
 }
 
 const mapDispatchToProps = {
-  // moveSelectedTabsToWindow,
-  // hideWindows: toggleWindowsVisibility,
 };
 
 const mapStateToProps = createStructuredSelector({
   sessions: getSessions,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sessions);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Sessions));

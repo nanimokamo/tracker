@@ -1,11 +1,13 @@
-.App {
+body, html {
 	width: 425px;
-	height: 600px;
+}
+
+.App {
 }
 
 .AppContent {
 	position: fixed;
-	top: $HEADER_HEIGHT;
+	top: $HEADER_HEIGHT + $TABS_HEIGHT;
 	left: 0;
 	right: 0;
 	bottom: 0;

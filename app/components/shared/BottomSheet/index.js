@@ -1,6 +1,8 @@
 import React from 'react';
 import Icon from '../Icon';
 
+const isScrolled = (e) => (state) => ({ isScrolled: e.target.scrollTop > 0 });
+
 class BottomSheet extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
@@ -23,7 +25,7 @@ class BottomSheet extends React.Component {
 
   handleScroll(e) {
     e.persist();
-    this.setState({ isScrolled: e.target.scrollTop > 0 });
+    this.setState(isScrolled(e));
   }
 
   render() {

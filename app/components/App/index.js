@@ -1,38 +1,58 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-// import Header from '../Header';
+import * as DB from 'database';
+
+import Tabs from 'components/shared/Tabs';
+import DialogManagerComponent from 'components/shared/DialogManager';
+
+import { syncData } from 'store/actions.js';
 
 import routes from '../../routes.js';
-// import { keyPressed } from '../../store/actions.js';
 
-const RouteWithSubRoutes = (route) => (
-  <Route path={route.path} render={props => (
-    <route.component {...props} routes={route.routes}/>
-  )}/>
-);
+export let DialogManager = undefined;
+
+const TAB_ITEMS = [
+  {
+    name: 'Sessions',
+    link: '/sessions',
+  },
+  {
+    name: 'Exercises',
+    link: '/exercises',
+  },
+];
 
 class App extends Component {
   static propTypes = {
+    syncData: React.PropTypes.func,
   }
-  
-  constructor(props) {
-    super(props);
-    // this.handleKeyDown = this.handleKeyDown.bind(this);
+
+  componentDidMount() {
+    DB.get('/')
+      .then(this.props.syncData);
+  }
+
+  setDialogManagerRef(el) {
+    if (el) DialogManager = el;
   }
 
   render() {
     return (
       <Router>
         <main className="App">
-          <Link to="sessions">Sessions</Link>
-          <Link to="exercises">Exercises</Link>
+          <Tabs items={TAB_ITEMS} />
+          <DialogManagerComponent ref={this.setDialogManagerRef} />
 
           <div className="AppContent">
             <div className="AppContent-inner">
               {routes.map((route, i) => (
-                <RouteWithSubRoutes key={i} {...route}/>
+                <Route
+                  key={i}
+                  exact
+                  {...route}
+                />
               ))}
             </div>
           </div>
@@ -43,7 +63,7 @@ class App extends Component {
 }
 
 const mapDispatchToProps = {
-  // keyPressed,
+  syncData,
 };
 
 const mapStateToProps = null;
