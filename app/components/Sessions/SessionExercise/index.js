@@ -17,7 +17,7 @@ const renderSessionExerciseSet = (props, parentProps, i) => {
   );
 };
 
-const SessionExercise = ({ exercise, sets, index, onRemove, onChangeSet, onRemoveSet }) => {
+const SessionExercise = ({ exercise, sets, index, onRemove, onChangeSet, onRemoveSet, onAddSet }) => {
   return (
     <fieldset>
       <legend>{exercise.name} – {exercise.muscleGroup}</legend>
@@ -30,7 +30,16 @@ const SessionExercise = ({ exercise, sets, index, onRemove, onChangeSet, onRemov
         type="button"
         onClick={(e) => {
           e.preventDefault();
-          onRemove(index);
+          onAddSet(e, index);
+        }}
+      >
+        + Add
+      </button>
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          onRemove(e, index);
         }}
       >
         Remove
@@ -46,6 +55,7 @@ SessionExercise.propTypes = {
   onRemove: React.PropTypes.func,
   onRemoveSet: React.PropTypes.func,
   onChangeSet: React.PropTypes.func,
+  onAddSet: React.PropTypes.func,
 };
 
 const mapStateToProps = (state, props) => createStructuredSelector({

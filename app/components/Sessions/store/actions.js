@@ -12,6 +12,6 @@ export const addSessions = (data) => ({
 });
 
 export const addSession = (data) => ({
-  type: ADD_SESSION,
+	type: ADD_SESSION,
   data: normalize(data, session),
 });
