@@ -12,6 +12,23 @@ firebase.initializeApp(config);
 
 export const database = firebase.database();
 
+export const watchAuthState = (cb) => {
+	firebase.auth().onAuthStateChanged(cb);
+};
+
+export const login = () => new Promise((resolve, reject) => {
+	const provider = new firebase.auth.TwitterAuthProvider();
+	firebase.auth().signInWithPopup(provider)
+		.then(resolve)
+		.catch(reject);
+});
+
+export const logout = () => new Promise((resolve, reject) => {
+	firebase.auth().signOut()
+		.then(resolve)
+		.catch(reject);
+});
+
 export const set = (location: string, data: object) => database.ref(location).set(data);
 
 export const get = (location: string): Promise<object> => new Promise((resolve, reject) => {

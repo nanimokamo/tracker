@@ -14,6 +14,9 @@
     "html": {
       "entrypoint": "app/index.html"
     },
+    "manifest": {
+      "entrypoint": "app/manifest.json"
+    },
     "fonts": {
       "entrypoint": "app/assets/fonts"
     }

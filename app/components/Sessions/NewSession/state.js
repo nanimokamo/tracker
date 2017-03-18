@@ -1,7 +1,7 @@
 import R from 'ramda';
 
 // DEFAULT STATES
-export const defaultExerciseItem = (exerciseId) => ({ exerciseId, datetime: new Date().getTime(), sets: [defaultSetItem()] });
+export const defaultExerciseItem = (exerciseId) => ({ exerciseId, sets: [defaultSetItem()] });
 export const defaultSetItem = () => ({ reps: 0, weight: 0 });
 
 // STATE CHANGES
@@ -31,3 +31,14 @@ export const removeSet = (exerciseIndex, setIndex) => (state) => {
   const path = R.lensPath(['exercises', exerciseIndex, 'sets']);
   return R.over(path, (s) => R.remove(setIndex, 1, s), state);
 };
+
+// FORMATS
+// export const formatForDb = (state) => {
+  // const path R.lensPath(['exercises']);
+  // const splitSets = (exercises) => {
+  //   return exercises.sets.map(ex => ({
+  //     exerciseId: 
+  //   }))
+  // }
+  // return R.over(path, )
+// }

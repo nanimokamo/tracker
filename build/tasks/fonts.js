@@ -5,7 +5,7 @@ import pkg from '../../package.json';
 
 const ROOT = '../../';
 const FONTS_SRC_FILES = [
-	PATH.resolve(__dirname, ROOT, 'src/app/assets/fonts/**'),
+	PATH.resolve(__dirname, ROOT, 'app/assets/fonts/**'),
 ];
 const FONTS_DEVELOPMENT_BUILD_FOLDER = PATH.resolve(__dirname, ROOT, 'dist/public/fonts');
 const FONTS_PRODUCTION_BUILD_FOLDER = PATH.resolve(__dirname, ROOT, 'dist/public/fonts');

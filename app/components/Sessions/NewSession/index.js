@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { DialogManager } from 'components/App';
 import ExercisePicker from 'components/Exercises/ExercisePicker';
@@ -9,6 +10,7 @@ import * as DB from 'database';
 
 import * as state from './state.js';
 import { addSession } from '../store/actions.js';
+import { getCurrentUserId } from 'components/Users/store/selectors.js';
 
 class NewSession extends React.Component {
   static propTypes = {
@@ -43,7 +45,9 @@ class NewSession extends React.Component {
 
   async createNewSession(e) {
     e.preventDefault();
-    const dbSession = await DB.push('/sessions', this.state);
+    // const data = state.formatForDb(this.state);
+    console.log(this.state);
+    const dbSession = await DB.push(`/users/${this.props.currentUserId}/sessions`, this.state);
     this.props.addSession(dbSession);
   }
 
@@ -111,6 +115,8 @@ const mapDispatchToProps = {
   addSession,
 };
 
-const mapStateToProps = null;
+const mapStateToProps = createStructuredSelector({
+  currentUserId: getCurrentUserId,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewSession);

@@ -6,7 +6,7 @@ import pkg from '../../package.json';
 
 const ROOT = '../../';
 const IMAGES_SRC_FILES = [
-	PATH.resolve(__dirname, ROOT, pkg.folders.images.entrypoint),
+	PATH.resolve(__dirname, ROOT, pkg.folders.images.entrypoint) + '/**',
 ];
 const IMAGES_DEVELOPMENT_BUILD_FOLDER = PATH.resolve(__dirname, ROOT, 'dist/public/images');
 const IMAGES_PRODUCTION_BUILD_FOLDER = IMAGES_DEVELOPMENT_BUILD_FOLDER;

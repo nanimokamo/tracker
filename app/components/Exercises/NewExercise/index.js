@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import Dialog from 'components/shared/DialogManager/Dialog';
 
 import * as DB from 'database';
 
 import { addExercise } from '../store/actions.js';
+import { getCurrentUserId } from 'components/Users/store/selectors.js';
 
 const MUSCLE_GROUPS = [
   'arms',
@@ -35,7 +37,7 @@ class NewExercise extends React.Component {
 
   async createNewExercise(e) {
     e.preventDefault();
-    const dbExercise = await DB.push('/exercises', this.state);
+    const dbExercise = await DB.push(`/users/${this.props.currentUserId}/exercises`, this.state);
     this.props.addExercise(dbExercise);
   }
 
@@ -66,6 +68,8 @@ const mapDispatchToProps = {
   addExercise,
 };
 
-const mapStateToProps = null;
+const mapStateToProps = createStructuredSelector({
+  currentUserId: getCurrentUserId,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewExercise);

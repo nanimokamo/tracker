@@ -8,7 +8,7 @@ import ListItem from 'components/shared/List/ListItem';
 
 import { getExercises } from './store/selectors.js';
 
-class Exercises extends React.Component {
+class Settings extends React.Component {
   static propTypes = {
     exercises: React.PropTypes.array,
   }
@@ -49,4 +49,4 @@ const mapStateToProps = createStructuredSelector({
   exercises: getExercises,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Exercises);
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);

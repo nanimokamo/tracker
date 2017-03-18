@@ -9,6 +9,7 @@ import * as DB from 'database';
 
 import { addExercise } from '../store/actions.js';
 import { getExercises } from '../store/selectors.js';
+import { getCurrentUserId } from 'components/Users/store/selectors.js';
 
 const input = (e) => () => ({ [e.target.name]: e.target.value });
 
@@ -34,7 +35,7 @@ class ExercisePicker extends React.Component {
 
   async createNewExercise(e) {
     e.preventDefault();
-    const dbExercise = await DB.push('/exercises', this.state);
+    const dbExercise = await DB.push(`/users/${this.props.currentUserId}/exercises`, this.state);
     this.props.addExercise(dbExercise);
     this.props.hideDialog('NEW_EXERCISE');
   }
@@ -75,6 +76,7 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = createStructuredSelector({
+  currentUserId: getCurrentUserId,
   exercises: getExercises,
 });
 
